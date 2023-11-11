@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shift Calculator</title>
+    <meta name="description" content="A shift calculator that generates a calendar to show which days you are working.">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="noticeBox">
+      <div id="notice">
+        <div>
+          The Shift Calaculator is designed for portrait mode on mobile devices.
+        </div>
+      </div>
+    </div>
+   
+    <main>
+      <div id="header">Shift Calculator</div>
+      <div id="dropBox" data-open="closed">
+        <div id="dropHeader">Set Shifts</div>
+        <p>Click on the pattern to clear</p>
+        <div id="patternBox">
+          <div id="pattern"></div>
+        </div>
+        <p>Then use the buttons to enter a complete work cycle</p>
+        <div id="patternBtns">
+          <button type="button" id="day">Day</button>
+          <button type="button" id="night">Night</button>
+          <button type="button" id="off">Off</button>
+        </div>
+        <p>Enter a date for this month where the cycle starts</p>
+        <input type="date" id="patternStart" placeholder="7/11/2023" />
+        <p>Now click Calculate to set shifts</p>
+        <button id="calculate" type="button">Calculate</button>
+      </div>
+
+      <div id="calendar">
+        <div id="calendarTop">
+          <div id="monthYear"></div>
+          <div id="weekDays">
+            <div>S</div>
+            <div>M</div>
+            <div>T</div>
+            <div>W</div>
+            <div>T</div>
+            <div>F</div>
+            <div>S</div>
+          </div>
+        </div>
+        <div id="calendarBody">
+          <div id="monthDays"></div>
+        </div>
+      </div>
+    </main>
+
+    <script type="module" src="generateYearObject.js"></script>
+  </body>
+</html>
