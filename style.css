@@ -283,8 +283,8 @@ main {
 }
 
 
-/* @media (orientation:landscape){
+@media (orientation:landscape){
   main {
     display:none;
   }
-} */
+}
