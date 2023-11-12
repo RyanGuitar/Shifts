@@ -17,10 +17,9 @@ function dropBoxControl() {
   if (status == "closed") {
     openDropBox();
   }
-  if (status != "open") {
-    return;
+  if (status == "open") {
+    closeDropBox();
   }
-  closeDropBox();
 }
 
 export { dropBoxControl };

@@ -21,6 +21,34 @@ body {
   background: var(--shell);
 }
 
+#patternStart {
+  width:50%;
+  height:7%;
+  background: var(--off);
+  font-size: 140%;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* For Chrome, Safari, and newer versions of Edge */
+#patternBox::-webkit-scrollbar {
+  width: 12px; /* Set the width of the scrollbar */
+}
+
+#patternBox::-webkit-scrollbar-thumb {
+  background-color: var(--onOff); /* Set the color of the scrollbar thumb */
+}
+
+#patternBox::-webkit-scrollbar-track {
+  background-color: var(--shell); /* Set the color of the scrollbar track */
+}
+
+/* For Firefox */
+#patternBox {
+  scrollbar-width: thin;
+  scrollbar-color: var(--onOff) var(--shell);
+}
+
 main {
   position: absolute;
   overflow: hidden;
@@ -250,41 +278,4 @@ main {
   background: var(--off);
   color: var(--shellText);
   text-shadow: 1px 1px 2px black;
-}
-
-#noticeBox {
-  position:absolute;
-  top:0;
-  left:0;
-  display:flex;
-  align-items: center;
-  width:100%;
-  height:100%;
-  background: var(--onOff);
-}
-
-#notice {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  color:var(--onOff);
-  text-shadow:1px 1px 1px black;
-  width: 100%;
-  height:20%;
-  background: var(--night);
-  & div {
-    text-align: center;
-    font-size: larger;
-    display:block;
-    width:100%;
-    height:auto;
-  }
-}
-
-
-@media (orientation:landscape){
-  main {
-    display:none;
-  }
 }

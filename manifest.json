@@ -1,6 +1,6 @@
 {
 "display_override": ["window-controls-overlay"], 
-"protocol_handlers": [{"protocol":"mailto","url":"/newEmail?to=%s"}], 
+"protocol_handlers": [{"protocol":"mailto","url":"/ryanelsguitar@gmail.com?to=%s"}], 
 "name": "Shift Calculator",
 "short_name": "Shifts",
 "start_url": "/",
@@ -10,7 +10,7 @@
 "dir": "auto",
 "theme_color": "#000000",
 "background_color": "#000000",
-"orientation": "portrait-primary",
+"orientation": "any",
 "icons": [
     {
         "src": "https://www.pwabuilder.com/assets/icons/icon_512.png",

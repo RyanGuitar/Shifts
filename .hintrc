@@ -7,7 +7,9 @@
       "default",
       {
         "ignore": [
-          "overscroll-behavior"
+          "overscroll-behavior",
+          "scrollbar-width",
+          "scrollbar-color"
         ]
       }
     ],
