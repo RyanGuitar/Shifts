@@ -6,6 +6,10 @@
     <title>Shift Calculator</title>
     <meta name="description" content="A shift calculator that generates a calendar to show which days you are working.">
     <meta name="theme-color" content="#000000"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -13,7 +17,8 @@
       rel="stylesheet"
     />
   <script>navigator.serviceWorker.register("service-worker.js")</script> 
-  <link rel="manifest" href="manifest.json" />  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />  
+  <link rel="stylesheet" href="style.css" />
   </head>
   <body>
    
@@ -32,7 +37,7 @@
           <button type="button" id="off">Off</button>
         </div>
         <p>Enter a date for this month where the cycle starts</p>
-        
+
         <input type="date" id="patternStart" placeholder="7/11/2023" />
 
         <p>Now click Calculate to set shifts</p>
