@@ -30,20 +30,18 @@ body {
   user-select: none;
 }
 
-/* For Chrome, Safari, and newer versions of Edge */
 #patternBox::-webkit-scrollbar {
-  width: 12px; /* Set the width of the scrollbar */
+  width: 12px; 
 }
 
 #patternBox::-webkit-scrollbar-thumb {
-  background-color: var(--onOff); /* Set the color of the scrollbar thumb */
+  background-color: var(--onOff); 
 }
 
 #patternBox::-webkit-scrollbar-track {
-  background-color: var(--shell); /* Set the color of the scrollbar track */
+  background-color: var(--shell); 
 }
 
-/* For Firefox */
 #patternBox {
   scrollbar-width: thin;
   scrollbar-color: var(--onOff) var(--shell);
