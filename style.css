@@ -13,6 +13,7 @@
 
 body {
   touch-action: none;
+  pointer-events: all;
   overscroll-behavior: none;
   font-family: 'Roboto', sans-serif;
   -webkit-user-select: none;
