@@ -12,9 +12,9 @@
 }
 
 body {
-  touch-action: none;
+  /* touch-action: none; */
  
-  overscroll-behavior: none;
+  /* overscroll-behavior: none; */
   font-family: 'Roboto', sans-serif;
   -webkit-user-select: none;
   user-select: none;
@@ -231,7 +231,7 @@ main {
 }
 
 #weekDays div {
-  pointer-events:stroke;
+  /* pointer-events:stroke; */
   display: flex;
   align-items: center;
   justify-content: center;
