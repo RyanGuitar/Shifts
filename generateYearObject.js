@@ -194,19 +194,22 @@ function showCalendar() {
 const calendarContainer = document.getElementById("monthDays");
 let startX;
 
-calendarContainer.addEventListener("pointerdown", handlePointerDown, { passive: true });
-calendarContainer.addEventListener("pointermove", handlePointerMove, { passive: true });
+calendarContainer.addEventListener("pointerdown", handlePointerDown);
+calendarContainer.addEventListener("pointermove", handlePointerMove);
 
 function handlePointerDown(event) {
+  event.preventDefault()
   startX = event.clientX; // Use clientX for pointer events instead of touches[0].clientX
 }
 
 function handlePointerMove(event) {
+  event.preventDefault(); // Prevent the default behavior, such as scrolling
+
   if (!startX) return;
 
-  const currentX = event.clientX; // Use clientX for pointer events instead of touches[0].clientX
+  const currentX = event.clientX;
   const deltaX = currentX - startX;
-  
+
   if (deltaX > 2) {
     // Swipe right
     getMonth(-1);

@@ -12,9 +12,6 @@
 }
 
 body {
-  /* touch-action: none; */
- 
-  /* overscroll-behavior: none; */
   font-family: 'Roboto', sans-serif;
   -webkit-user-select: none;
   user-select: none;
@@ -231,7 +228,6 @@ main {
 }
 
 #weekDays div {
-  /* pointer-events:stroke; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -240,6 +236,9 @@ main {
 }
 
 #monthDays {
+  -ms-touch-action: pan-x;
+  touch-action: pan-x;
+  pointer-events: all;
   display: flex;
   flex-flow: wrap;
   width: 100%;
