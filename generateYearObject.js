@@ -164,29 +164,57 @@ function showCalendar() {
   addToId("monthYear", calendarMonth);
 }
 
+// const calendarContainer = document.getElementById("monthDays");
+// let startX;
+
+// calendarContainer.addEventListener("touchstart", handleTouchStart, {passive: true});
+// calendarContainer.addEventListener("touchmove", handleTouchMove, {passive: true});
+
+// function handleTouchStart(event) {
+//   startX = event.touches[0].clientX;
+// }
+
+// function handleTouchMove(event) {
+//   if (!startX) return;
+
+//   const currentX = event.touches[0].clientX;
+//   const deltaX = currentX - startX;
+//   if (deltaX > 5) {
+//     // Swipe right
+//     getMonth(-1);
+//   } 
+//   if(deltaX < -5) {
+//     // Swipe left
+//     getMonth(1);
+//   }
+
+//   startX = null;
+// }
+
 const calendarContainer = document.getElementById("monthDays");
 let startX;
 
-calendarContainer.addEventListener("touchstart", handleTouchStart, {passive: true});
-calendarContainer.addEventListener("touchmove", handleTouchMove, {passive: true});
+calendarContainer.addEventListener("pointerdown", handlePointerDown, { passive: true });
+calendarContainer.addEventListener("pointermove", handlePointerMove, { passive: true });
 
-function handleTouchStart(event) {
-  startX = event.touches[0].clientX;
+function handlePointerDown(event) {
+  startX = event.clientX; // Use clientX for pointer events instead of touches[0].clientX
 }
 
-function handleTouchMove(event) {
+function handlePointerMove(event) {
   if (!startX) return;
 
-  const currentX = event.touches[0].clientX;
+  const currentX = event.clientX; // Use clientX for pointer events instead of touches[0].clientX
   const deltaX = currentX - startX;
-  if (deltaX > 5) {
+  
+  if (deltaX > 0) {
     // Swipe right
     getMonth(-1);
   } 
-  if(deltaX < -5) {
+  if (deltaX < 0) {
     // Swipe left
     getMonth(1);
   }
-
   startX = null;
 }
+
