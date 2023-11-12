@@ -207,11 +207,11 @@ function handlePointerMove(event) {
   const currentX = event.clientX; // Use clientX for pointer events instead of touches[0].clientX
   const deltaX = currentX - startX;
   
-  if (deltaX > 0) {
+  if (deltaX > 2) {
     // Swipe right
     getMonth(-1);
   } 
-  if (deltaX < 0) {
+  if (deltaX < -2) {
     // Swipe left
     getMonth(1);
   }
