@@ -2,7 +2,7 @@ import { addToId, addClick, getId, toText } from "./helper.js";
 import { dropBoxControl } from "./dropBox.js";
 
 let shiftSettings = {};
-
+let target = "";
 let yearObject = {};
 
 const worker = new Worker("worker.js");
@@ -13,58 +13,54 @@ worker.addEventListener("message", (event) => {
     yearObject = data;
     showCalendar();
   }
-  if (msg === "write") {
-    console.log(msg);
-  }
+  if (msg === "write") {}
   if (msg === "error") {
-      shiftSettings = {
-        years: new Date().getFullYear() + 10,
-        referenceYear: new Date().getFullYear(),
-        startMonth: 11,
-        startDay: 7,
-        pattern: [
-          "day",
-          "day",
-          "day",
-          "night",
-          "night",
-          "night",
-          "night",
-          "off",
-          "off",
-          "off",
-          "day",
-          "day",
-          "day",
-          "day",
-          "night",
-          "night",
-          "night",
-          "off",
-          "off",
-          "off",
-          "off",
-        ]
-      }
-      worker.postMessage({ msg: "generate", data: shiftSettings });
-      displayPattern()
-    } 
-    
-    if(msg === "read"){
-      shiftSettings = data
-      worker.postMessage({ msg: "generate", data: shiftSettings });
-      displayPattern()
-    }
+    shiftSettings = {
+      years: new Date().getFullYear() + 10,
+      referenceYear: new Date().getFullYear(),
+      startMonth: 11,
+      startDay: 7,
+      pattern: [
+        "day",
+        "day",
+        "day",
+        "night",
+        "night",
+        "night",
+        "night",
+        "off",
+        "off",
+        "off",
+        "day",
+        "day",
+        "day",
+        "day",
+        "night",
+        "night",
+        "night",
+        "off",
+        "off",
+        "off",
+        "off",
+      ],
+    };
+    worker.postMessage({ msg: "generate", data: shiftSettings });
+    displayPattern();
+  }
+
+  if (msg === "read") {
+    shiftSettings = data;
+    worker.postMessage({ msg: "generate", data: shiftSettings });
+    displayPattern();
+  }
 });
 
-worker.postMessage({ msg: "read", data: "" });
-
-function displayPattern(){
-  let list = ``
-  for(let i = 0;i < shiftSettings.pattern.length;i++){
-    list += `<div>${shiftSettings.pattern[i]}</div>`
+function displayPattern() {
+  let list = "";
+  for (let i = 0; i < shiftSettings.pattern.length; i++) {
+    list += `<div>${shiftSettings.pattern[i]}</div>`;
   }
-  addToId("pattern", list)
+  addToId("pattern", list);
 }
 
 function clearPattern() {
@@ -74,7 +70,7 @@ function clearPattern() {
 
 function addShift(e) {
   shiftSettings.pattern.push(e.target.id);
-  displayPattern()
+  displayPattern();
   const container = getId("patternBox");
   container.scrollLeft = container.scrollWidth;
 }
@@ -89,7 +85,7 @@ getId("patternStart").addEventListener("change", (e) => {
     shiftSettings.startMonth = thisMonth;
     shiftSettings.startDay = +daySelected;
   } else {
-    return
+    return;
   }
 });
 
@@ -164,41 +160,46 @@ function showCalendar() {
 }
 
 function pointer() {
-  const monthDays = getId("monthDays")
-  let pointerStart = 0
-  let pointerUp = 0
-  let swipe = 0
+  let pointerStart = 0;
 
-  function onKeyDown(event) {
-    pointerStart = event.pageX
+  function onPointerStart(event) {
+    pointerStart = getEventPageX(event);
     event.preventDefault();
-    monthDays.setPointerCapture(event.pointerId);
-    monthDays.onpointermove = onKeyMove;
+    target.setPointerCapture(event.pointerId);
+    target.addEventListener("pointerup", onPointerEnd);
+    target.addEventListener("mousemove", onPointerMove);
+    target.addEventListener("touchend", onPointerEnd, { once: true });
+  }
 
-    monthDays.onpointerup = (event) => {
-    
-      pointerUp = event.pageX
-      swipe = pointerStart - pointerUp
-      monthDays.onpointermove = null;
-      monthDays.onpointerup = null;
-      if (swipe > 5) {
-        getMonth(1);
-      } 
-      if(swipe < -5) {
-        getMonth(-1);
-      }
+  function onPointerEnd(event) {
+    let pointerEnd = getEventPageX(event);
+    let swipe = pointerStart - pointerEnd;
 
+    if (swipe > 5) {
+      getMonth(1);
     }
-    return;
+    if (swipe < -5) {
+      getMonth(-1);
+    }
+
+    target.removeEventListener("pointerup", onPointerEnd);
+    target.removeEventListener("mousemove", onPointerMove);
   }
 
-  function onKeyMove(event) {
+  function onPointerMove(event) {}
 
+  function getEventPageX(event) {
+    return event.touches ? event.touches[0].pageX : event.pageX;
   }
-  getId('monthDays').onpointerdown = onKeyDown
-  getId('monthDays').ondragstart = () => false;
+
+  getId("monthDays").addEventListener("pointerdown", onPointerStart);
+  getId("monthDays").addEventListener("touchstart", onPointerStart);
+  getId("monthDays").ondragstart = () => false;
 }
 
 window.onload = () => {
-  pointer()
-}
+  worker.postMessage({ msg: "read", data: "" });
+  target = getId("monthDays");
+  pointer();
+};
+
