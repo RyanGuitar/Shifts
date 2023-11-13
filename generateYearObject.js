@@ -107,8 +107,7 @@ addClick("pattern", clearPattern);
 addClick("patternBtns", addShift);
 addToId("pattern", JSON.stringify(shiftSettings.pattern));
 
-// calendar code
-let months = [
+const months = [
   "January",
   "February",
   "March",
@@ -164,60 +163,42 @@ function showCalendar() {
   addToId("monthYear", calendarMonth);
 }
 
-// const calendarContainer = document.getElementById("monthDays");
-// let startX;
+function pointer() {
+  const monthDays = getId("monthDays")
+  let pointerStart = 0
+  let pointerUp = 0
+  let swipe = 0
 
-// calendarContainer.addEventListener("touchstart", handleTouchStart, {passive: true});
-// calendarContainer.addEventListener("touchmove", handleTouchMove, {passive: true});
+  function onKeyDown(event) {
+    pointerStart = event.pageX
+    event.preventDefault();
+    monthDays.setPointerCapture(event.pointerId);
+    monthDays.onpointermove = onKeyMove;
 
-// function handleTouchStart(event) {
-//   startX = event.touches[0].clientX;
-// }
+    monthDays.onpointerup = (event) => {
+    
+      pointerUp = event.pageX
+      swipe = pointerStart - pointerUp
+      monthDays.onpointermove = null;
+      monthDays.onpointerup = null;
+      if (swipe > 5) {
+        getMonth(1);
+      } 
+      if(swipe < -5) {
+        getMonth(-1);
+      }
 
-// function handleTouchMove(event) {
-//   if (!startX) return;
-
-//   const currentX = event.touches[0].clientX;
-//   const deltaX = currentX - startX;
-//   if (deltaX > 5) {
-//     // Swipe right
-//     getMonth(-1);
-//   } 
-//   if(deltaX < -5) {
-//     // Swipe left
-//     getMonth(1);
-//   }
-
-//   startX = null;
-// }
-
-const calendarContainer = document.getElementById("monthDays");
-let startX;
-
-calendarContainer.addEventListener("pointerdown", handlePointerDown);
-calendarContainer.addEventListener("pointermove", handlePointerMove);
-
-function handlePointerDown(event) {
-  event.preventDefault()
-  startX = event.clientX; // Use clientX for pointer events instead of touches[0].clientX
-}
-
-function handlePointerMove(event) {
-  event.preventDefault(); // Prevent the default behavior, such as scrolling
-
-  if (!startX) return;
-
-  const currentX = event.clientX;
-  const deltaX = currentX - startX;
-
-  if (deltaX > 2) {
-    // Swipe right
-    getMonth(-1);
-  } 
-  if (deltaX < -2) {
-    // Swipe left
-    getMonth(1);
+    }
+    return;
   }
-  startX = null;
+
+  function onKeyMove(event) {
+
+  }
+  getId('monthDays').onpointerdown = onKeyDown
+  getId('monthDays').ondragstart = () => false;
 }
 
+window.onload = () => {
+  pointer()
+}
