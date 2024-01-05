@@ -17,7 +17,7 @@ worker.addEventListener("message", (event) => {
   if (msg === "error") {
     shiftSettings = {
       years: new Date().getFullYear() + 10,
-      referenceYear: new Date().getFullYear(),
+      referenceYear: 2023,
       startMonth: 11,
       startDay: 7,
       pattern: [
