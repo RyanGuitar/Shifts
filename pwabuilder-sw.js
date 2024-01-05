@@ -1,6 +1,6 @@
 // This is the service worker with the Cache-first network
 
-const CACHE = "pwabuilder-precache-v5";
+const CACHE = "pwabuilder-precache-v6";
 
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/6.6.0/workbox-sw.js');
 
